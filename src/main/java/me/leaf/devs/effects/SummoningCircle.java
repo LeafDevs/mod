@@ -1,5 +1,6 @@
 package me.leaf.devs.effects;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -30,7 +31,7 @@ public class SummoningCircle extends Effects{
             .setCullState(LodestoneRenderTypeRegistry.NO_CULL));
     
     @Override
-    public boolean render() {
+    public boolean render(PoseStack ps) {
         if (hasRendered) {
             return true;
         }

@@ -1,5 +1,6 @@
 package me.leaf.devs.effects;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import team.lodestar.lodestone.registry.common.particle.LodestoneParticleRegistry;
@@ -17,7 +18,7 @@ public class Explosion extends Effects {
     }
 
     @Override
-    public boolean render() {
+    public boolean render(PoseStack ps) {
         if (hasRendered) {
             return false;
         }

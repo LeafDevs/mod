@@ -16,7 +16,7 @@ public class EffectRenderer {
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_WEATHER)) {
             effects.removeIf(effect -> {
-                boolean rendered = effect.render();
+                boolean rendered = effect.render(event.getPoseStack());
                 Main.getLogger().info("Rendering effect: " + effect + ", rendered: " + rendered);
                 return rendered;
             });

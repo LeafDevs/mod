@@ -1,5 +1,7 @@
 package me.leaf.devs.effects;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import team.lodestar.lodestone.registry.common.particle.LodestoneParticleRegistry;
@@ -16,14 +18,14 @@ public abstract class Effects {
     protected final Level level;
     protected final Vec3 position;
     protected boolean hasRendered;
-    protected final Random random;
+    protected final RandomSource random;
     
     protected Effects(Level level, Vec3 position) {
         this.level = level;
         this.position = position;
         this.hasRendered = false;
-        this.random = new Random();
+        this.random = level.getRandom();
     }
-    
-    public abstract boolean render();
+
+    public abstract boolean render(PoseStack ps);
 }

@@ -1,5 +1,6 @@
 package me.leaf.devs;
 
+import me.leaf.devs.effects.VFXTest;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.InteractionResultHolder;
@@ -30,7 +31,7 @@ public class SmiteWand extends Item {
         
         // Create smite effect from sky to target
         Vec3 skyPos = new Vec3(targetPos.x, targetPos.y + 20, targetPos.z);
-        EffectRenderer.addEffect(new Smite(level, skyPos, targetPos));
+        EffectRenderer.addEffect(new VFXTest(level, targetPos));
         
         return InteractionResultHolder.success(player.getItemInHand(hand));
     }

@@ -1,5 +1,6 @@
 package me.leaf.devs.effects;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -39,7 +40,7 @@ public class Smite extends Effects {
             .setCullState(LodestoneRenderTypeRegistry.NO_CULL));
 
     @Override
-    public boolean render() {
+    public boolean render(PoseStack ps) {
         if (hasRendered) {
             return true;
         }
