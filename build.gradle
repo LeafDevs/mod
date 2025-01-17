@@ -9,6 +9,20 @@ buildscript {
     }
 }
 
+
+buildscript {
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+    }
+}
+
+
 plugins {
     id 'eclipse'
     id 'idea'
@@ -139,6 +153,13 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
+    mavenCentral()
+    maven {
+        name 'Curios maven'
+        url = "https://maven.theillusivec4.top/"
+    }
+    maven { url = 'https://maven.blamejared.com/' }
+
 }
 
 dependencies {
@@ -165,6 +186,14 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+    // implementation fg.deobf("team.lodestar.lodestone:lodestone:${minecraft_version}-${lodestone_version}")
+    //1.18.2 Example: implementation fg.deobf("team.lodestar.lodestone:lodestone:1.18.2-1.4.1.435")
+    //1.19.2 Example: implementation fg.deobf("team.lodestar.lodestone:lodestone:1.19.2-1.4.2.83")
+    implementation fg.deobf("team.lodestar.lodestone:lodestone:1.20.1-1.6.4.1.255") { transitive = false }
+
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.11.1+1.20.1:api") { transitive = false }
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.11.1+1.20.1") { transitive = false }
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -207,3 +236,9 @@ tasks.named('jar', Jar).configure {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
+
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
