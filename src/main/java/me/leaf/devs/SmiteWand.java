@@ -30,8 +30,8 @@ public class SmiteWand extends Item {
         Vec3 targetPos = hitResult.getLocation();
         
         // Create smite effect from sky to target
-        Vec3 skyPos = new Vec3(targetPos.x, targetPos.y + 20, targetPos.z);
-        EffectRenderer.addEffect(new VFXTest(level, targetPos));
+        Vec3 skyPos = new Vec3(targetPos.x, targetPos.y + 50, targetPos.z);
+        EffectRenderer.addEffect(new Smite(level, skyPos, targetPos)); // Swapped targetPos and skyPos since Smite expects (start, end)
         
         return InteractionResultHolder.success(player.getItemInHand(hand));
     }

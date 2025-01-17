@@ -18,13 +18,12 @@ public abstract class Effects {
     protected final Level level;
     protected final Vec3 position;
     protected boolean hasRendered;
-    protected final RandomSource random;
+    protected final Random random = new Random();
     
     protected Effects(Level level, Vec3 position) {
         this.level = level;
         this.position = position;
         this.hasRendered = false;
-        this.random = level.getRandom();
     }
 
     public abstract boolean render(PoseStack ps);

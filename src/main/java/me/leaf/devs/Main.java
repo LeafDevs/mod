@@ -3,8 +3,12 @@ package me.leaf.devs;
 import com.mojang.logging.LogUtils;
 
 import me.leaf.devs.effects.Effects;
+import me.leaf.devs.registry.ParticleRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
@@ -21,7 +25,9 @@ import team.lodestar.lodestone.registry.client.LodestoneRenderTypeRegistry;
 import java.util.ArrayList;
 
 import org.slf4j.Logger;
+import team.lodestar.lodestone.registry.common.particle.LodestoneParticleRegistry;
 import team.lodestar.lodestone.systems.model.obj.ObjModel;
+import team.lodestar.lodestone.systems.particle.world.type.LodestoneWorldParticleType;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Main.MODID)
@@ -35,20 +41,9 @@ public class Main {
 
     // Create DeferredRegister for items
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    
+
     public static final RegistryObject<Item> EXPLOSION_WAND = ITEMS.register("explosion_wand", ExplosionWand::new);
     public static final RegistryObject<Item> SMITE_WAND = ITEMS.register("smite_wand", SmiteWand::new);
-
-    // Create DeferredRegister for particle types
-    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MODID);
-
-    // Register test particle texture
-    public static final net.minecraft.resources.ResourceLocation TEST_PARTICLE_TEXTURE = new net.minecraft.resources.ResourceLocation(MODID, "textures/entities/circle6a.png");
-
-
-    // Register the beam particle model
-    public static final ObjModel BEAM_MODEL = new ObjModel(new net.minecraft.resources.ResourceLocation(MODID, "models/block/test"));
-    
 
     public Main() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -66,6 +61,8 @@ public class Main {
         MinecraftForge.EVENT_BUS.register(Command.class);
         MinecraftForge.EVENT_BUS.register(EffectRenderer.class);
         MinecraftForge.EVENT_BUS.register(SmiteWand.class);
+
+        ParticleRegistry.PARTICLES.register(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
