@@ -1,5 +1,6 @@
 package me.leaf.devs;
 
+import me.leaf.devs.effects.SummoningCircle;
 import me.leaf.devs.effects.VFXTest;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -31,7 +32,7 @@ public class SmiteWand extends Item {
         
         // Create smite effect from sky to target
         Vec3 skyPos = new Vec3(targetPos.x, targetPos.y + 50, targetPos.z);
-        EffectRenderer.addEffect(new Smite(level, skyPos, targetPos)); // Swapped targetPos and skyPos since Smite expects (start, end)
+        EffectRenderer.addEffect(new SummoningCircle(level, targetPos)); // Swapped targetPos and skyPos since Smite expects (start, end)
         
         return InteractionResultHolder.success(player.getItemInHand(hand));
     }

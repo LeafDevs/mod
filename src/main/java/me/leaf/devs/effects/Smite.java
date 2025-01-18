@@ -23,8 +23,6 @@ import team.lodestar.lodestone.systems.rendering.rendeertype.RenderTypeToken;
 
 import java.awt.Color;
 
-import me.leaf.devs.shaders.SmiteShader;
-
 public class Smite extends Effects {
     private int age = 0;
     private final Vec3 start;
